@@ -68,24 +68,41 @@ function FeatureSection({
   );
 }
 
+function FeatureAnnouncement() {
+  // 占位符，实际可替换为动态内容
+  return (
+    <span className="inline-block bg-blue-100 text-blue-700 text-xs font-semibold rounded px-2 py-0.5">
+      ✨ 新功能上线！
+    </span>
+  );
+}
+
 export default function Home() {
   return (
     <main className="min-h-screen bg-gradient-to-b from-slate-900 to-black pb-16">
-      {/* Hero Section */}
-      <section className="w-full flex flex-col items-center justify-center py-16 px-4 bg-gradient-to-b from-slate-900 to-black">
-        <h1 className="text-4xl sm:text-5xl font-extrabold text-white mb-4 text-center tracking-tight drop-shadow">
-          Developer Roadmaps
-        </h1>
-        <p className="text-lg text-slate-200 mb-8 text-center max-w-2xl">
-          Community driven roadmaps, articles and guides for developers to grow
-          in their career.
-        </p>
-        <a
-          href="#role-roadmaps"
-          className="inline-block bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-full px-8 py-3 text-lg shadow transition"
-        >
-          浏览路线图
-        </a>
+      {/* Hero Section 详细还原 */}
+      <section className="w-full flex flex-col items-center justify-center py-16 px-4 bg-white">
+        <div className="rounded-2xl px-8 py-10 max-w-2xl w-full flex flex-col items-center relative">
+          {/* 公告、主标题、副标题等内容 */}
+          <p className="-mt-4 mb-7 sm:-mt-10 sm:mb-4 w-full flex justify-center">
+            <FeatureAnnouncement />
+          </p>
+          <h1 className="mb-2 text-black text-2xl font-bold sm:mb-4 sm:text-5xl sm:leading-tight text-center">
+            Developer Roadmaps
+          </h1>
+          {/* 大屏副标题 */}
+          <p className="hidden px-4 text-lg text-gray-400 sm:block text-center">
+            <span className="font-medium text-gray-400">roadmap.sh</span> is a
+            community effort to create roadmaps, guides and other educational
+            content to help guide developers in picking up a path and guide
+            their learnings.
+          </p>
+          {/* 小屏副标题 */}
+          <p className="text-md block px-0 text-gray-400 sm:hidden text-center">
+            Community created roadmaps, guides and articles to help developers
+            grow in their career.
+          </p>
+        </div>
       </section>
 
       {/* Feature Sections */}
