@@ -1,5 +1,6 @@
 import * as React from "react";
 import type { FeatureItem } from "@/types/feature";
+import { getUser } from "@/lib/auth";
 
 const roleRoadmaps: FeatureItem[] = [
   { text: "前端开发路线图", url: "/roadmap/frontend", isNew: true },
@@ -69,7 +70,6 @@ function FeatureSection({
 }
 
 function FeatureAnnouncement() {
-  // 占位符，实际可替换为动态内容
   return (
     <span className="inline-block bg-blue-100 text-blue-700 text-xs font-semibold rounded px-2 py-0.5">
       ✨ 新功能上线！
@@ -77,44 +77,59 @@ function FeatureAnnouncement() {
   );
 }
 
+function UserWelcome() {
+  const user = getUser();
+
+  if (!user) {
+    return null;
+  }
+
+  return (
+    <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-8">
+      <p className="text-blue-800">
+        欢迎回来，<span className="font-semibold">{user.name}</span>
+        ！继续您的学习之旅。
+      </p>
+    </div>
+  );
+}
+
 export default function Home() {
   return (
     <main className="min-h-screen bg-gradient-to-b from-slate-900 to-black pb-16">
-      {/* Hero Section 详细还原 */}
+      {/* Hero Section */}
       <section className="w-full flex flex-col items-center justify-center py-16 px-4 bg-white">
         <div className="rounded-2xl px-8 py-10 max-w-2xl w-full flex flex-col items-center relative">
-          {/* 公告、主标题、副标题等内容 */}
           <p className="-mt-4 mb-7 sm:-mt-10 sm:mb-4 w-full flex justify-center">
             <FeatureAnnouncement />
           </p>
           <h1 className="mb-2 text-black text-2xl font-bold sm:mb-4 sm:text-5xl sm:leading-tight text-center">
             Developer Roadmaps
           </h1>
-          {/* 大屏副标题 */}
           <p className="hidden px-4 text-lg text-gray-400 sm:block text-center">
-            <span className="font-medium text-gray-400">roadmap.sh</span> is a
-            community effort to create roadmaps, guides and other educational
-            content to help guide developers in picking up a path and guide
-            their learnings.
+            <span className="font-medium text-gray-400">roadmap.sh</span>{" "}
+            是一个社区项目，
+            旨在创建路线图、指南和其他教育内容，帮助开发者选择学习路径并指导他们的学习。
           </p>
-          {/* 小屏副标题 */}
           <p className="text-md block px-0 text-gray-400 sm:hidden text-center">
-            Community created roadmaps, guides and articles to help developers
-            grow in their career.
+            社区创建的学习路线图、指南和文章，帮助开发者在职业生涯中成长。
           </p>
         </div>
       </section>
 
-      {/* Feature Sections */}
-      <div className="mt-10">
-        <FeatureSection heading="Role-based Roadmaps" items={roleRoadmaps} />
-        <FeatureSection heading="Skill-based Roadmaps" items={skillRoadmaps} />
-        <FeatureSection heading="Project Ideas" items={projectGroups} />
-        <FeatureSection heading="Best Practices" items={bestPractices} />
-        <FeatureSection heading="Questions" items={questions} />
+      {/* User Welcome Section */}
+      <div className="max-w-5xl mx-auto px-4">
+        <UserWelcome />
       </div>
 
-      {/* 可选：引导、视频等区块，可后续补充 */}
+      {/* Feature Sections */}
+      <div className="mt-10">
+        <FeatureSection heading="基于角色的路线图" items={roleRoadmaps} />
+        <FeatureSection heading="基于技能的路线图" items={skillRoadmaps} />
+        <FeatureSection heading="项目创意" items={projectGroups} />
+        <FeatureSection heading="最佳实践" items={bestPractices} />
+        <FeatureSection heading="问答" items={questions} />
+      </div>
     </main>
   );
 }
